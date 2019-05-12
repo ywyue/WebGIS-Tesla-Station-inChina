@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DoY41cP2vaQKZSAXasBPLDObrOOIMgz5"></script>
+	<!-- 加载城市列表 -->
+	<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+	<script src="echarts.common.min.js"></script>
+	<title>添加控件</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">特斯拉充电桩 &nbsp <img src="tesla.png" width="32" height="29" alt=""/></a>
+	
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="index.html">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">地图</span>
+          </a>
+        </li>
+		  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="pointchart.html">
+            <i class="fa fa-fw fa-sitemap"></i>
+            <span class="nav-link-text">散点图</span>
+          </a>
+        </li>
+		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="hotchart.html">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">热力图</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="columnarchart.html">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">柱状图</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="piechart.html">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">饼状图</span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">充电站介绍</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+            <li>
+              <a href="destinationstation.html">目的地充电站</a>
+            </li>
+            <li>
+              <a href="superstation.html">超级充电站</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+        <li class="nav-item">
+          <form class="form-inline my-2 my-lg-0 mr-lg-2">
+            <div class="input-group">
+              <input class="form-control" type="text" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>切换城市</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="content-wrapper">
+	 <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Charts</li>
+      </ol>
+      <!-- Area Chart Example-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-area-chart"></i> 各省充电桩分布饼状统计图</div>
+		  <div style="width:100%;">
+        <div id="main1" style="width:33%;height: 550px; float:left;overflow:hidden;"></div>
+		<div id="main2" style="width:33%;height: 550px;float:right;overflow:hidden;"></div>
+	    <div id="main3" style="width:33%;height: 550px;float:right;overflow:hidden;"></div>
+			   </div>
+        <div class="card-footer small text-muted">2019年数据</div>
+      </div>
+     
+    </div>
+<!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    
+    <!-- Scroll to Top Button-->
+    
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="js/sb-admin-datatables.min.js"></script>
+    <script src="js/sb-admin-charts.min.js"></script>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	 // 绘制图表。
+    var myChart1 = echarts.init(document.getElementById('main1'));
+    var myChart2 = echarts.init(document.getElementById('main2'));
+	var myChart3 = echarts.init(document.getElementById('main3'));
+       var option1 = {
+        title : {
+			text: '超级充电站',
+       
+        left: 'center',
+			padding: 30
+           
+        },
+        tooltip : {
+            formatter: "{b} : {c} ({d}%)"
+        },
+        series : [
+            {
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data: [
+                      {name: '河北', value: 14},{name: '山西', value: 1},{name: '辽宁', value: 6},
+            {name: '吉林', value: 0},{name: '黑龙江', value: 1},{name: '江苏', value: 21},
+            {name: '浙江', value: 17},{name: '安徽', value: 4},{name: '福建', value: 5},
+            {name: '江西', value: 4},{name: '山东', value: 6},{name: '河南', value: 7},
+            {name: '湖北', value: 7},{name: '湖南', value: 6},{name: '广东', value: 44},
+            {name: '海南', value: 2},{name: '四川', value: 14},{name: '贵州', value: 0},
+		    {name: '云南', value: 1},{name: '陕西', value: 7},{name: '甘肃', value: 0},
+            {name: '青海', value: 0},{name: '内蒙古自治区', value: 2},{name: '广西壮族自治区', value: 2},
+            {name: '西藏自治区', value: 0},{name: '宁夏回族自治区', value: 0},{name: '新疆维吾尔自治区', value: 0},
+            {name: '北京', value: 20},{name: '天津', value: 3},{name: '重庆', value: 3},
+            {name: '上海', value: 23},
+                  ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+  };
+	var option2 = {
+        title : {
+			text: '目的地充电站',
+       
+        left: 'center',
+			padding: 30
+           
+        },
+        tooltip : {
+            formatter: "{b} : {c} ({d}%)"
+        },
+        series : [
+            {
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data: [
+                      {name: '河北', value: 10},{name: '山西', value: 2},{name: '辽宁', value: 10},
+            {name: '吉林', value: 1},{name: '黑龙江', value: 2},{name: '江苏', value: 59},
+            {name: '浙江', value: 70},{name: '安徽', value: 14},{name: '福建', value: 7},
+            {name: '江西', value: 9},{name: '山东', value: 24},{name: '河南', value: 16},
+            {name: '湖北', value: 15},{name: '湖南', value: 11},{name: '广东', value: 96},
+            {name: '海南', value: 14},{name: '四川', value: 51},{name: '贵州', value: 6},
+			{name: '云南', value: 13},{name: '陕西', value: 15},{name: '甘肃', value: 5},
+            {name: '青海', value: 4},{name: '内蒙古自治区', value: 10},{name: '广西壮族自治区', value: 6},
+            {name: '西藏自治区', value: 4},{name: '宁夏回族自治区', value: 1},{name: '新疆维吾尔自治区', value: 5},
+            {name: '北京', value: 37},{name: '天津', value: 7},{name: '重庆', value: 16},
+            {name: '上海', value: 37},
+                  ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+  };
+	var option3 = {
+        title : {
+			text: '总数',
+       
+        left: 'center',
+			padding: 30
+           
+        },
+        tooltip : {
+            formatter: "{b} : {c} ({d}%)"
+        },
+        series : [
+            {
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data: [
+                      {name: '河北', value: 24},{name: '山西', value: 3},{name: '辽宁', value: 16},
+            {name: '吉林', value: 1},{name: '黑龙江', value: 3},{name: '江苏', value: 80},
+            {name: '浙江', value: 87},{name: '安徽', value: 18},{name: '福建', value: 12},
+            {name: '江西', value: 13},{name: '山东', value: 30},{name: '河南', value: 23},
+            {name: '湖北', value: 22},{name: '湖南', value: 17},{name: '广东', value: 140},
+            {name: '海南', value: 16},{name: '四川', value: 65},{name: '贵州', value: 6},
+			{name: '云南', value: 14},{name: '陕西', value: 22},{name: '甘肃', value: 5},
+            {name: '青海', value: 4},{name: '内蒙古自治区', value: 12},{name: '广西壮族自治区', value: 8},
+            {name: '西藏自治区', value: 4},{name: '宁夏回族自治区', value: 1},{name: '新疆维吾尔自治区', value: 5},
+            {name: '北京', value: 57},{name: '天津', value: 10},{name: '重庆', value: 19},
+            {name: '上海', value: 60},
+                  ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+  };
+        myChart1.setOption(option1);
+		myChart2.setOption(option3);
+		myChart3.setOption(option2);
+</script>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+		
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DoY41cP2vaQKZSAXasBPLDObrOOIMgz5"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+	<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+   </head>
+   <body style="height: 100%; margin: 0">
+	   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">特斯拉充电站 &nbsp <img src="tesla.png" width="32" height="29" alt=""/></a>
+	
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="index.html">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">地图</span>
+          </a>
+        </li>
+		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="pointchart.html">
+            <i class="fa fa-fw fa-sitemap"></i>
+            <span class="nav-link-text">散点图</span>
+          </a>
+        </li>
+		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="hotchart.html">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">热力图</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="columnarchart.html">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">柱状图</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="piechart.html">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">饼状图</span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">充电站介绍</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+            <li>
+              <a href="destinationstation.html">目的地充电站</a>
+            </li>
+            <li>
+              <a href="superstation.html">超级充电站</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+        <li class="nav-item">
+          <form class="form-inline my-2 my-lg-0 mr-lg-2">
+            <div class="input-group">
+              <input class="form-control" type="text" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>切换城市</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+	   <div class="content-wrapper">
+		   <div class="container-fluid">
+			   <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Charts</li>
+      </ol>
+			   <div class="card mb-3">
+				   <div class="card-header">
+          <i class="fa fa-area-chart"></i> 各省充电桩分布柱状统计图</div>
+       <div id="container" style="height: 580px"></div>
+	   <div class="card-footer small text-muted">2019年数据</div>		   
+				   
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=DoY41cP2vaQKZSAXasBPLDObrOOIMgz5"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+		   </div>
+	   </div>
+		   </div>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    legend: {},
+    tooltip: {},
+    dataset: {
+        source: [
+            ['product', '超级充电站', '目的地充电站', '总数'],
+            ['河北', 14, 10, 24],
+            ['山西', 1, 2, 3],
+            ['辽宁', 6, 10, 16],
+            ['吉林', 0, 1, 1],
+            ['黑龙江', 1, 2, 3],
+            ['江苏', 21, 59, 80],
+            ['浙江', 17, 70, 87],
+            ['安徽', 4, 14, 18],
+            ['福建', 5, 7, 12],
+            ['江西', 4, 9, 13],
+            ['山东', 6, 24, 30],
+            ['河南', 7, 16, 23],
+            ['湖北', 7, 15, 22],
+            ['湖南', 6, 11, 17],
+            ['广东', 44, 96, 140],
+            ['海南', 2, 14, 16],
+            ['四川', 14, 51, 65],
+            ['贵州', 0, 6, 6],
+            ['云南', 1, 13, 14],
+            ['陕西', 7, 15, 22],
+            ['甘肃', 0, 5, 5],
+            ['青海', 0, 4, 4],
+            ['内蒙古自治区', 2, 10, 12],
+            ['广西壮族自治区', 2, 6, 8],
+            ['西藏自治区', 0, 4, 4],
+            ['宁夏回族自治区', 0, 1, 1],
+            ['新疆维吾尔自治区', 0, 5, 5],
+            ['北京', 20, 37, 57],
+            ['天津', 3, 7, 10],
+            ['重庆', 3, 16, 19],
+            ['上海', 23, 37, 60]
+        ]
+    },
+    xAxis: {type: 'category',axisLabel: {  
+   interval:0,  
+   rotate:30  
+}  },
+    yAxis: {},
+    // Declare several bar series, each will be mapped
+    // to a column of dataset.source by default.
+    series: [
+        {type: 'bar'},
+        {type: 'bar'},
+        {type: 'bar'}
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>

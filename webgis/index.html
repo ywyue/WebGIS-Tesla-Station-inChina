@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+		
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DoY41cP2vaQKZSAXasBPLDObrOOIMgz5"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+	<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+	<title>特斯拉充电站</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">特斯拉充电站 &nbsp <img src="tesla.png" width="32" height="29" alt=""/></a>
+	
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="index.html">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">地图</span>
+          </a>
+        </li>
+		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="pointchart.html">
+            <i class="fa fa-fw fa-sitemap"></i>
+            <span class="nav-link-text">散点图</span>
+          </a>
+        </li>
+		  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="hotchart.html">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">热力图</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="columnarchart.html">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">柱状图</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="piechart.html">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">饼状图</span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">充电站介绍</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+            <li>
+              <a href="destinationstation.html">目的地充电站</a>
+            </li>
+            <li>
+              <a href="superstation.html">超级充电站</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+        <li class="nav-item">
+          <form class="form-inline my-2 my-lg-0 mr-lg-2">
+            <div class="input-group">
+              <input class="form-control" type="text" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>切换城市</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="allmap"></div>
+  
+  <div class="content-wrapper">
+<!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    
+    <!-- Scroll to Top Button-->
+    
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="js/sb-admin-datatables.min.js"></script>
+    <script src="js/sb-admin-charts.min.js"></script>
+</div>
+	
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");    // 创建Map实例
+
+	map.centerAndZoom(new BMap.Point(114.371605, 30.544165), 11);  // 初始化地图,设置中心点坐标和地图级别
+    
+	var mapType1 = new BMap.MapTypeControl(
+		{
+			mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP],
+			anchor: BMAP_ANCHOR_TOP_LEFT
+		}
+	);
+	var overView = new BMap.OverviewMapControl();
+	var overViewOpen = new BMap.OverviewMapControl({isOpen:true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT});
+	var customLayer=new BMap.CustomLayer({
+			geotableId: 201728,
+			q: '', //检索关键字
+			tags: '', //空格分隔的多字符串
+			filter: '' //过滤条件,参考http://lbsyun.baidu.com/lbs-geosearch.htm#.search.nearby
+		});
+	customLayer.addEventListener('hotspotclick',callback);
+	var customLayertwo=new BMap.CustomLayer({
+			geotableId: 201750,
+			q: '', //检索关键字
+			tags: '', //空格分隔的多字符串
+			filter: '' //过滤条件,参考http://lbsyun.baidu.com/lbs-geosearch.htm#.search.nearby
+		});
+	function callback(e)//单击热点图层
+	{
+			var customPoi = e.customPoi;//poi的默认字段
+			var contentPoi=e.content;//poi的自定义字段
+			var content = '';
+			var searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+				title: customPoi.title, //标题
+				width: 300, //宽度
+				height: 10, //高度
+				panel : "panel", //检索结果面板
+				enableAutoPan : true, //自动平移
+				enableSendToPhone: true, //是否显示发送到手机按钮
+				searchTypes :[
+					BMAPLIB_TAB_SEARCH,   //周边检索
+					BMAPLIB_TAB_TO_HERE,  //到这里去
+					BMAPLIB_TAB_FROM_HERE //从这里出发
+				]
+			});
+			var point = new BMap.Point(customPoi.point.lng, customPoi.point.lat);
+			searchInfoWindow.open(point);
+	}
+	map.addTileLayer(customLayer);
+	map.addTileLayer(customLayertwo);
+	map.addControl(mapType1);          //2D图，混合图
+    map.addControl(overView);          //添加默认缩略地图控件
+    map.addControl(overViewOpen);      //右下角，打开
+    
+	
+	var size = new BMap.Size(30, 60);
+    map.addControl(new BMap.CityListControl({
+    anchor: BMAP_ANCHOR_TOP_RIGHT,
+    offset: size,
+    // 切换城市之间事件
+    // onChangeBefore: function(){
+    //    alert('before');
+    // },
+    // 切换城市之后事件
+    // onChangeAfter:function(){
+    //   alert('after');
+    // }
+}));
+	
+	
+    map.setCurrentCity("武汉");          //设置地图显示的城市 此项是必须设置的
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	
+	
+		
+		
+
+	
+  
+	
+	
+</script>
