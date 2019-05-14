@@ -6,67 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-  <!-- Bootstrap core CSS-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
 	
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-	<style type="text/css">
-	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
-	</style>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DoY41cP2vaQKZSAXasBPLDObrOOIMgz5"></script>
-	<!-- 加载城市列表 -->
-	<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
-	<script src="echarts.common.min.js"></script>
-	<title>添加控件</title>
+	<script src="js/echarts.common.min.js"></script>
+	
+	<title>特斯拉充电站</title>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">特斯拉充电桩 &nbsp <img src="tesla.png" width="32" height="29" alt=""/></a>
+    <a class="navbar-brand" href="index.html">特斯拉充电站 &nbsp <img src="images/tesla.png" width="32" height="29" alt=""/></a>
 	
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="地图">
           <a class="nav-link" href="index.html">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">地图</span>
           </a>
         </li>
-		  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="散点图">
           <a class="nav-link" href="pointchart.html">
             <i class="fa fa-fw fa-sitemap"></i>
             <span class="nav-link-text">散点图</span>
           </a>
         </li>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+		  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="热力图">
           <a class="nav-link" href="hotchart.html">
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">热力图</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="柱状图">
           <a class="nav-link" href="columnarchart.html">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">柱状图</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="饼状图">
           <a class="nav-link" href="piechart.html">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">饼状图</span>
           </a>
         </li>
 
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="充电站介绍">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">充电站介绍</span>
@@ -81,6 +71,7 @@
           </ul>
         </li>
       </ul>
+		
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
           <a class="nav-link text-center" id="sidenavToggler">
@@ -132,25 +123,13 @@
       </div>
      
     </div>
-<!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    
-    <!-- Scroll to Top Button-->
-    
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
-    <script src="js/sb-admin-charts.min.js"></script>
+	  <script src="vendor/jquery/jquery.min.js"></script>
+  	  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+      <script src="vendor/chart.js/Chart.min.js"></script>
+      <script src="js/sb-admin.min.js"></script>
+      <script src="js/sb-admin-datatables.min.js"></script>
+      <script src="js/sb-admin-charts.min.js"></script>
 </div>
 </body>
 </html>
